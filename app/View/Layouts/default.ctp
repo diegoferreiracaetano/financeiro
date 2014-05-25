@@ -30,7 +30,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		echo $this->Html->meta('icon');
 
 		echo $this->Html->css(array('style','bootstrap.min'/*,'bootstrap-theme.min'*/));
-		echo $this->Html->script(array('jquery','bootstrap.min'));	
+		echo $this->Html->script(array('jquery-2.1.1.min','bootstrap.min'));	
 		
 		echo $this->fetch('meta');
 		echo $this->fetch('css');

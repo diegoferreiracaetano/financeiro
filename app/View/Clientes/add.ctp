@@ -11,8 +11,7 @@
 		<legend><?php echo __('Adicionar Cliente'); ?></legend>
 	<?php
 		echo $this->Form->input('nome');
-	?>
-	<?php echo $this->Form->submit('Salvar', array(
+		echo $this->Form->submit('Salvar', array(
 			'div' => 'form-group',
 			'class' => 'btn btn-primary'
 		)); ?>

@@ -3,8 +3,9 @@ App::uses('AppModel', 'Model');
 /**
  * Entrada Model
  *
- * @property Franquias $Franquias
- * @property Contas $Contas
+ * @property Franquia $Franquia
+ * @property FormaPagamento $FormaPagamento
+ * @property Conta $Conta
  */
 class Entrada extends AppModel {
 
@@ -15,6 +16,16 @@ class Entrada extends AppModel {
  */
 	public $validate = array(
 		'franquias_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'forma_pagamentos_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -37,6 +48,13 @@ class Entrada extends AppModel {
 		'Franquia' => array(
 			'className' => 'Franquia',
 			'foreignKey' => 'franquias_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'FormaPagamento' => array(
+			'className' => 'FormaPagamento',
+			'foreignKey' => 'forma_pagamentos_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

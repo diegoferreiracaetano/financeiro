@@ -11,5 +11,10 @@
 			<?php echo h($formaPagamento['FormaPagamento']['descricao']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Quantidade Parcelas'); ?></dt>
+		<dd>
+			<?php echo h($formaPagamento['FormaPagamento']['quantidade_parcelas']); ?>
+			&nbsp;
+		</dd>
 	</dl>
 </div>

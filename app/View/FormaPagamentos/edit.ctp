@@ -12,6 +12,7 @@
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('descricao');
+		echo $this->Form->input('quantidade_parcelas');
 		echo $this->Form->submit('Salvar', array(
 			'div' => 'form-group',
 			'class' => 'btn btn-primary'

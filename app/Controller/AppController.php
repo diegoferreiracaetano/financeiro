@@ -38,6 +38,7 @@ class AppController extends Controller {
 	public $msgExclusaoError = 'O registro não pode ser deletado, por favor tente novamente';
 	
 	public $helpers = array(
+		'PhpExcel.PhpExcel',
 		'Session',
 		'Html' => array('className' => 'BoostCake.BoostCakeHtml'),
 		'Form' => array('className' => 'BoostCake.BoostCakeForm'),

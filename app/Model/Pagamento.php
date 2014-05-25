@@ -46,8 +46,9 @@ class Pagamento extends AppModel {
 			'foreignKey' => '',
 			'conditions' => 'Status.id = (SELECT 
 				CASE 
-				WHEN Pagamento.status_id = 3 AND Pagamento.data_pagamento IS NOT NULL THEN 3
+				WHEN Pagamento.data_pagamento IS NOT NULL THEN 3
 				WHEN DATEDIFF(CURRENT_DATE(),Pagamento.data_vencimento) > 0 THEN 2
+				WHEN DATEDIFF(CURRENT_DATE(),Pagamento.data_vencimento) > -7 THEN 4
 				WHEN Pagamento.status_id IS NULL THEN 1
 				ELSE Pagamento.status_id 
 				END)',

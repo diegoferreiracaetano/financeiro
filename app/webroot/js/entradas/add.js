@@ -1,6 +1,12 @@
 $(function(){
-	$('#EntradaDescricaoParcelas').change(function(){
-		if($('#EntradaValorTotal').val().length > 0 && $('#EntradaQuantidadeParcelas').val().length > 0){
+	$('#EntradaFormaPagamentosId').change(function(){
+		
+		if($('#EntradaValorTotal').val().length > 0){
+			var url = '../formaPagamentos/listarPagamentos/'+$(this).val()+'/'+$('#EntradaValorTotal').val();
+			$("#parcelas").load(url);
+		}
+		/*alert($(this).val());
+		if($('#EntradaValorTotal').val().length > 0){
 			
 			var conteudo ='<h3>Pagamentos</h3>';
 			conteudo += '<div class="form-group">';
@@ -24,6 +30,6 @@ $(function(){
 			conteudo += '</div>';
 			conteudo += '</div>';
 			$('#parcelas').html(conteudo);	
-		}	
+		}*/	
 	});	
 });

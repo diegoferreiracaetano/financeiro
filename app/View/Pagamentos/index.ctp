@@ -1,6 +1,19 @@
 <div class="pagamentos index">
 	<h2><?php echo __('Entradas'); ?></h2>
-	<div class="right"><?php echo $this->Html->link(__('Adicionar Entradas'), array('controller' => 'entradas', 'action' => 'add')); ?></div>
+	<div class="right">
+	<div class="botoesPagamentos">
+		<?php echo $this->Html->link(__('Adicionar Entradas'), array('controller' => 'entradas', 'action' => 'add'));?>
+		<span>
+		<?php echo $this->Html->link(
+							$this->Html->image('excel.png', array('alt' => 'Exportar para excel', 'border' => '0','width'=>'30px')),
+							array('action' => 'excel'),
+							array('target' => '', 'escape' => false)
+						);
+		?>
+		</span>
+	</div>
+	</div>
+	
 	<table cellpadding="0" cellspacing="0" class="table table-hover table-striped">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
@@ -14,7 +27,14 @@
 			<th class="actions"><?php echo __('Açoes'); ?></th>
 	</tr>
 	<?php foreach ($pagamentos as $pagamento): ?>
-	<tr>
+	<tr
+	title="<?php echo  $pagamento['Status']['descricao'] ?>"
+	<?php if($pagamento['Status']['descricao'] == 'Pago'){echo 'class="success"';}
+		  elseif ($pagamento['Status']['descricao'] == 'Atrasado'){ echo 'class="danger"';}
+		  elseif ($pagamento['Status']['descricao'] == 'Prester a Vencer'){ echo 'class="warning"';}
+	?>
+	
+	>
 		<td><?php echo h($pagamento['Pagamento']['id']); ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($pagamento['Entrada']['id']  .' - '.$pagamento['Entrada']['descricao'], array('controller' => 'entradas', 'action' => 'view', $pagamento['Entrada']['id'])); ?>

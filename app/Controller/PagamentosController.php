@@ -14,6 +14,11 @@ class PagamentosController extends AppController {
  * @var array
  */
 	public $components = array('Paginator');
+	public $paginate = array(
+        'order' => array(
+            'Pagamento.id' => 'asc'
+        )
+    );
 /**
  * index method
  *
@@ -21,6 +26,7 @@ class PagamentosController extends AppController {
  */
 	public function index() {
 		$this->Pagamento->recursive = 0;
+		$this->Paginator->settings = $this->paginate;
 		$this->set('pagamentos', $this->Paginator->paginate());
 	}
 
@@ -126,5 +132,11 @@ class PagamentosController extends AppController {
 			));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+	
+	public function excel(){
+		$this->Pagamento->recursive = 0;
+		$this->Paginator->settings = $this->paginate;
+		$this->set('pagamentos', $this->Paginator->paginate());
 	}
 }

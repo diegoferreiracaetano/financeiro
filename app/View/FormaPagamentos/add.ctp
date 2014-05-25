@@ -8,9 +8,10 @@
 	'class' => 'well'
 )); ?>
 	<fieldset>
-		<legend><?php echo __('Adicionar Forma Pagamento'); ?></legend>
+		<legend><?php echo __('Editar Forma Pagamento'); ?></legend>
 	<?php
 		echo $this->Form->input('descricao');
+		echo $this->Form->input('quantidade_parcelas');
 		echo $this->Form->submit('Salvar', array(
 			'div' => 'form-group',
 			'class' => 'btn btn-primary'

@@ -5,12 +5,14 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('descricao'); ?></th>
+			<th><?php echo $this->Paginator->sort('Quantidade de parcelas'); ?></th>
 			<th class="actions"><?php echo __('Ações'); ?></th>
 	</tr>
 	<?php foreach ($formaPagamentos as $formaPagamento): ?>
 	<tr>
 		<td><?php echo h($formaPagamento['FormaPagamento']['id']); ?>&nbsp;</td>
 		<td><?php echo h($formaPagamento['FormaPagamento']['descricao']); ?>&nbsp;</td>
+		<td><?php echo h($formaPagamento['FormaPagamento']['quantidade_parcelas']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('Visualizar'), array('action' => 'view', $formaPagamento['FormaPagamento']['id'])); ?>
 			<?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $formaPagamento['FormaPagamento']['id'])); ?>

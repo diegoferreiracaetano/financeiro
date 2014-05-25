@@ -2,3 +2,10 @@
 .right{
 	text-align: right;
 }
+.botoesPagamentos{
+	float: right;
+	padding: 5px;	
+}
+.botoesPagamentos span{
+	margin: 5px;
+}
