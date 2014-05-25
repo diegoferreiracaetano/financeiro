@@ -49,10 +49,16 @@ class ContasController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Conta->create();
 			if ($this->Conta->save($this->request->data)) {
-				$this->Session->setFlash(__('The conta has been saved.'));
+				$this->Session->setFlash(__($this->msgGravacaoSucesso), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-success'
+				));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The conta could not be saved. Please, try again.'));
+				$this->Session->setFlash(__($this->msgGravacaoError), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-danger'
+				));
 			}
 		}
 	}
@@ -70,10 +76,16 @@ class ContasController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Conta->save($this->request->data)) {
-				$this->Session->setFlash(__('The conta has been saved.'));
+				$this->Session->setFlash(__($this->msgGravacaoSucesso), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-success'
+				));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The conta could not be saved. Please, try again.'));
+				$this->Session->setFlash(__($this->msgGravacaoError), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-danger'
+				));
 			}
 		} else {
 			$options = array('conditions' => array('Conta.' . $this->Conta->primaryKey => $id));
@@ -95,9 +107,15 @@ class ContasController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Conta->delete()) {
-			$this->Session->setFlash(__('The conta has been deleted.'));
+			$this->Session->setFlash(__($this->msgExclusaoSucesso), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-success'
+				));
 		} else {
-			$this->Session->setFlash(__('The conta could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__($this->msgExclusaoError), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-danger'
+			));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}

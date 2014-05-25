@@ -14,8 +14,9 @@ class EntradasControllerTest extends ControllerTestCase {
  */
 	public $fixtures = array(
 		'app.entrada',
-		'app.franquias',
-		'app.contas'
+		'app.franquia',
+		'app.cliente',
+		'app.conta'
 	);
 
 /**

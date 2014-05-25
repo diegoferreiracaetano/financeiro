@@ -49,10 +49,17 @@ class FranquiasController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Franquia->create();
 			if ($this->Franquia->save($this->request->data)) {
-				$this->Session->setFlash(__('The franquia has been saved.'));
+				$this->Session->setFlash(__($this->msgGravacaoSucesso), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-success'
+				));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The franquia could not be saved. Please, try again.'));
+				$this->Session->setFlash(__($this->msgGravacaoError), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-danger'
+				));
+				
 			}
 		}
 		$clientes = $this->Franquia->Cliente->find('list',array('fields' => array('Cliente.nome')));
@@ -72,10 +79,16 @@ class FranquiasController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Franquia->save($this->request->data)) {
-				$this->Session->setFlash(__('The franquia has been saved.'));
+				$this->Session->setFlash(__($this->msgGravacaoSucesso), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-success'
+				));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The franquia could not be saved. Please, try again.'));
+				$this->Session->setFlash(__($this->msgGravacaoError), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-danger'
+				));
 			}
 		} else {
 			$options = array('conditions' => array('Franquia.' . $this->Franquia->primaryKey => $id));
@@ -99,9 +112,15 @@ class FranquiasController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Franquia->delete()) {
-			$this->Session->setFlash(__('The franquia has been deleted.'));
+		$this->Session->setFlash(__($this->msgExclusaoSucesso), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-success'
+				));
 		} else {
-			$this->Session->setFlash(__('The franquia could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__($this->msgExclusaoError), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-danger'
+			));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}

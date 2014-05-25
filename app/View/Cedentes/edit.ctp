@@ -1,11 +1,22 @@
 <div class="cedentes form">
-<?php echo $this->Form->create('Cedente'); ?>
+<?php echo $this->Form->create('Cedente',array(
+	'inputDefaults' => array(
+		'div' => 'form-group',
+		'wrapInput' => false,
+		'class' => 'form-control'
+	),
+	'class' => 'well'
+)); ?>
 	<fieldset>
-		<legend><?php echo __('Edit Cedente'); ?></legend>
+		<legend><?php echo __('Editar Cedente'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('nome');
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+	<?php echo $this->Form->submit('Salvar', array(
+			'div' => 'form-group',
+			'class' => 'btn btn-primary'
+		)); ?>
+<?php echo $this->Form->end(); ?>
 </div>

@@ -29,33 +29,53 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.generic');
-
+		echo $this->Html->css(array('style','bootstrap.min'/*,'bootstrap-theme.min'*/));
+		echo $this->Html->script(array('jquery','bootstrap.min'));	
+		
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
 </head>
+
 <body>
-	<div id="container">
-		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
-		</div>
-		<div id="content">
-
-			<?php echo $this->Session->flash(); ?>
-
-			<?php echo $this->fetch('content'); ?>
-		</div>
-		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false)
-				);
-			?>
-		</div>
-	</div>
-	<?php echo $this->element('sql_dump'); ?>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Financeiro</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+          	<li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cadastros <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+              	<li class="dropdown-header"><h4>Entradas</h4></li>
+              	<li><?php echo $this->Html->link(__('Clientes'), array('controller' => 'clientes', 'action' => 'index')); ?></li>
+              	<li><?php echo $this->Html->link(__('Franquias'), array('controller' => 'franquias', 'action' => 'index')); ?></li>
+                <li><?php echo $this->Html->link(__('Contas'), array('controller' => 'contas', 'action' => 'index')); ?></li>
+                <li class="divider"></li>
+                <li class="dropdown-header"><h4>Saidas</h4></li>
+                <li><?php echo $this->Html->link(__('Cedentes'), array('controller' => 'cedentes', 'action' => 'index')); ?></li>
+                <li><?php echo $this->Html->link(__('Despesas'), array('controller' => 'despesas', 'action' => 'index')); ?></li>
+                <li><?php echo $this->Html->link(__('Formas de Pagamentos'), array('controller' => 'formaPagamentos', 'action' => 'index')); ?></li>
+              </ul>
+            </li>
+            <li><?php echo $this->Html->link(__('Contas a Pagar'), array('controller' => 'pagamentos', 'action' => 'index')); ?></li>
+            <li><?php echo $this->Html->link(__('Contas a Receber'), array('controller' => 'saidas', 'action' => 'index')); ?></li>
+            <li><?php echo $this->Html->link(__('Fluxo de Caixa'), array('controller' => 'relatorios', 'action' => 'index')); ?></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    <div class="container" style="margin-top:70px">
+		<?php echo $this->Session->flash(); ?>
+		<?php echo $this->fetch('content'); ?>
+    </div><!-- /.container -->
 </body>
 </html>

@@ -8,12 +8,12 @@ App::uses('AppController', 'Controller');
  */
 class EntradasController extends AppController {
 
-	var $name = 'Entradas';
 /**
  * Components
  *
  * @var array
  */
+
 	public $components = array('Paginator');
 
 /**
@@ -47,13 +47,20 @@ class EntradasController extends AppController {
  * @return void
  */
 	public function add() {
+
 		if ($this->request->is('post')) {
 			$this->Entrada->create();
 			if ($this->Entrada->save($this->request->data)) {
-				$this->Session->setFlash(__('The entrada has been saved.'));
+				$this->Session->setFlash(__($this->msgGravacaoSucesso), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-success'
+				));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The entrada could not be saved. Please, try again.'));
+				$this->Session->setFlash(__($this->msgGravacaoError), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-danger'
+				));
 			}
 		}
 		$franquias = $this->Entrada->Franquia->find('list',array('fields' => array('Franquia.nome')));
@@ -74,17 +81,23 @@ class EntradasController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Entrada->save($this->request->data)) {
-				$this->Session->setFlash(__('The entrada has been saved.'));
+				$this->Session->setFlash(__($this->msgGravacaoSucesso), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-success'
+				));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The entrada could not be saved. Please, try again.'));
+				$this->Session->setFlash(__($this->msgGravacaoError), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-danger'
+				));
 			}
 		} else {
 			$options = array('conditions' => array('Entrada.' . $this->Entrada->primaryKey => $id));
 			$this->request->data = $this->Entrada->find('first', $options);
 		}
-		$franquias = $this->Entrada->Franquia->find('list');
-		$contas = $this->Entrada->Conta->find('list');
+		$franquias = $this->Entrada->Franquia->find('list',array('fields' => array('Franquia.nome')));
+		$contas = $this->Entrada->Conta->find('list',array('fields' => array('Conta.nome')));
 		$this->set(compact('franquias', 'contas'));
 	}
 
@@ -102,9 +115,15 @@ class EntradasController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Entrada->delete()) {
-			$this->Session->setFlash(__('The entrada has been deleted.'));
+			$this->Session->setFlash(__($this->msgExclusaoSucesso), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-success'
+				));
 		} else {
-			$this->Session->setFlash(__('The entrada could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__($this->msgExclusaoError), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-danger'
+			));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
