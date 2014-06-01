@@ -1,5 +1,45 @@
 <div class="pagamentos index">
 	<h2><?php echo __('Entradas'); ?></h2>
+	<?php
+echo $this->Search->create('teste', array(
+	'inputDefaults' => array(
+		'div' => 'form-group',
+		'wrapInput' => false,
+		'class' => 'form-control'
+	),
+	'class' => 'well'
+));
+echo '<div class="form-group"><div class="row">';
+echo $this->Search->selectFields('filter1',
+        array(
+            'Pagamento.id'       => __('ID', true),
+            'Franquia.nome'     => __('Franquia', true),
+            'Entrada.descricao' => __('Entrada', true),
+         	'Status.descricao' => __('Status', true),
+        ),
+        array(
+            'class' => 'select-box form-control','div'=>'col-md-3','label'=>'Campos'
+        )
+    );
+echo $this->Search->selectOperators('filter1',
+        array(
+            'LIKE' => __('contendo', true),
+            '='    => __('igual', true),
+        ),
+        array(
+            'class' => 'select-box form-control','div'=>'col-md-3','label'=>'Tipo de Pesquisa'
+        )
+    );
+echo $this->Search->input('filter1',array('label'=>'Pesquisa','div' => 'col-md-3'));
+echo $this->Search->submit('Pesquisar', array(
+			'style' =>'margin-top:25px',
+			'class' => 'btn btn-primary',
+			'div' => 'col-md-3'
+		)); 
+echo '</div></div>';		
+		
+	?>
+
 	<div class="right">
 	<div class="botoesPagamentos">
 		<?php echo $this->Html->link(__('Adicionar Entradas'), array('controller' => 'entradas', 'action' => 'add'));?>
@@ -17,6 +57,7 @@
 	<table cellpadding="0" cellspacing="0" class="table table-hover table-striped">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
+			<th><?php echo $this->Paginator->sort('fraquia_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('entradas_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('status_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('descricao'); ?></th>
@@ -36,6 +77,7 @@
 	
 	>
 		<td><?php echo h($pagamento['Pagamento']['id']); ?>&nbsp;</td>
+		<td><?php echo h($pagamento['Franquia']['nome']); ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($pagamento['Entrada']['id']  .' - '.$pagamento['Entrada']['descricao'], array('controller' => 'entradas', 'action' => 'view', $pagamento['Entrada']['id'])); ?>
 		</td>
@@ -43,10 +85,10 @@
 			<?php echo $this->Html->link($pagamento['Status']['descricao'], array('controller' => 'status', 'action' => 'view', $pagamento['Status']['id'])); ?>
 		</td>
 		<td><?php echo h($pagamento['Pagamento']['descricao']); ?>&nbsp;</td>
-		<td><?php echo h($pagamento['Pagamento']['data_emissao']); ?>&nbsp;</td>
-		<td><?php echo h($pagamento['Pagamento']['data_vencimento']); ?>&nbsp;</td>
-		<td><?php echo h($pagamento['Pagamento']['data_pagamento']); ?>&nbsp;</td>
-		<td><?php echo h($pagamento['Pagamento']['valor']); ?>&nbsp;</td>
+		<td><?php echo $pagamento['Pagamento']['data_emissao'] ?CakeTime::format($pagamento['Pagamento']['data_emissao'], '%d-%m-%Y'):"" ?>&nbsp;</td>
+		<td><?php echo $pagamento['Pagamento']['data_vencimento'] ?CakeTime::format($pagamento['Pagamento']['data_emissao'], '%d-%m-%Y'):"" ?>&nbsp;</td>
+		<td><?php echo $pagamento['Pagamento']['data_pagamento'] ?CakeTime::format($pagamento['Pagamento']['data_pagamento'], '%d-%m-%Y'):""?>&nbsp;</td>
+		<td><?php echo  $this->Number->currency($pagamento['Pagamento']['valor'], 'BRL'); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('Visualizar'), array('action' => 'view', $pagamento['Pagamento']['id'])); ?>
 			<?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $pagamento['Pagamento']['id'])); ?>

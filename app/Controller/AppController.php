@@ -31,18 +31,46 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-	
+
 	public $msgGravacaoSucesso = 'Registro salvo com sucesso!';
 	public $msgGravacaoError = 'O registro não pode ser salvo, por favor tente novamente.';
 	public $msgExclusaoSucesso = 'Registro foi deletado com sucesso!';
 	public $msgExclusaoError = 'O registro não pode ser deletado, por favor tente novamente';
-	
+
+	var $components = array(
+			'Session',
+		    'FilterResults.Filter' => array(
+		        'auto' => array(
+		            'paginate' => false,
+		            'explode'  => true,  // recommended
+			),
+		    'explode' => array(
+		            'character'   => ' ',
+		            'concatenate' => 'AND',
+			)
+		)
+	);
+
 	public $helpers = array(
 		'PhpExcel.PhpExcel',
 		'Session',
 		'Html' => array('className' => 'BoostCake.BoostCakeHtml'),
 		'Form' => array('className' => 'BoostCake.BoostCakeForm'),
 		'Paginator' => array('className' => 'BoostCake.BoostCakePaginator'),
+		'FilterResults.Search' => array(
+	        'operators' => array(
+	            'LIKE'       => 'containing',
+	            'NOT LIKE'   => 'not containing',
+	            'LIKE BEGIN' => 'starting with',
+	            'LIKE END'   => 'ending with',
+	            '='  => 'equal to',
+	            '!=' => 'different',
+	            '>'  => 'greater than',
+	            '>=' => 'greater or equal to',
+	            '<'  => 'less than',
+	            '<=' => 'less or equal to'
+	        )
+    	)
 	);
-	
+
 }

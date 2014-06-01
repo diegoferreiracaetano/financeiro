@@ -14,7 +14,7 @@ class Entrada extends AppModel {
  *
  * @var array
  */
-	public $validate = array(
+	/*public $validate = array(
 		'franquias_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
@@ -36,7 +36,7 @@ class Entrada extends AppModel {
 			),
 		),
 	);
-
+*/
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**

@@ -1,6 +1,8 @@
 <?php
 App::uses('AppController', 'Controller');
 App::uses('Pagamento', 'Model');
+App::uses('CakeNumber', 'Utility');
+App::uses('CakeTime', 'Utility');
 /**
  * Entradas Controller
  *
@@ -9,6 +11,8 @@ App::uses('Pagamento', 'Model');
  */
 class EntradasController extends AppController {
 
+
+	
 	/**
 	 * Components
 	 *
@@ -16,6 +20,7 @@ class EntradasController extends AppController {
 	 */
 
 	public $components = array('Paginator');
+	
 
 	/**
 	 * index method
@@ -23,6 +28,7 @@ class EntradasController extends AppController {
 	 * @return void
 	 */
 	public function index() {
+		CakeNumber::addFormat('BRL', array('before' => 'R$', 'thousands' => '.', 'decimals' => ','));	
 		$this->Entrada->recursive = 0;
 		$this->set('entradas', $this->Paginator->paginate());
 	}

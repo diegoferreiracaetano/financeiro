@@ -4,16 +4,19 @@ App::uses('AppModel', 'Model');
  * Pagamento Model
  *
  * @property Entradas $Entradas
+ * @property Entradas $Franquias
  * @property Status $Status
  */
 class Pagamento extends AppModel {
+	
+	public $name = 'Pagamento';
 
 /**
  * Validation rules
  *
  * @var array
  */
-	public $validate = array(
+	/*public $validate = array(
 		'entradas_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
@@ -24,7 +27,7 @@ class Pagamento extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-	);
+	);*/
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
@@ -41,6 +44,13 @@ class Pagamento extends AppModel {
 			'fields' => array('Entrada.id','Entrada.descricao'),
 			'order' => ''
 		),
+		'Franquia' => array(
+			'className' => 'Franquia',
+			'foreignKey' => '',
+			'conditions' => 'Franquia.id = Entrada.franquias_id ',
+			'fields' => '',
+			'order' => ''
+		),
 		'Status' => array(
 			'className' => 'Status',
 			'foreignKey' => '',
@@ -49,11 +59,20 @@ class Pagamento extends AppModel {
 				WHEN Pagamento.data_pagamento IS NOT NULL THEN 3
 				WHEN DATEDIFF(CURRENT_DATE(),Pagamento.data_vencimento) > 0 THEN 2
 				WHEN DATEDIFF(CURRENT_DATE(),Pagamento.data_vencimento) > -7 THEN 4
-				WHEN Pagamento.status_id IS NULL THEN 1
-				ELSE Pagamento.status_id 
+				ELSE 1
 				END)',
 			'fields' => '',
 			'order' => ''
 		)
 	);
+	
+/**
+ * Relatórios
+ */	
+ public function getTotalEntradas(){
+ 
+ 	$array_dados =  $this->query('SELECT sum(valor) as total from pagamentos where data_pagamento IS NOT NULL');
+ 	return $array_dados[0][0];	
+ }
+	
 }

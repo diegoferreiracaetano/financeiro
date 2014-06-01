@@ -1,5 +1,7 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('CakeNumber', 'Utility');
+App::uses('CakeTime', 'Utility');
 /**
  * Pagamentos Controller
  *
@@ -19,12 +21,20 @@ class PagamentosController extends AppController {
             'Pagamento.id' => 'asc'
         )
     );
+    
 /**
  * index method
  *
  * @return void
  */
 	public function index() {
+		CakeNumber::addFormat('BRL', array('before' => 'R$', 'thousands' => '.', 'decimals' => ','));	
+		// Add filter
+	    $this->Filter->addFilters('filter1');
+		    // Define conditions
+   		$this->Filter->setPaginate('conditions', $this->Filter->getConditions());
+   		
+   		
 		$this->Pagamento->recursive = 0;
 		$this->Paginator->settings = $this->paginate;
 		$this->set('pagamentos', $this->Paginator->paginate());

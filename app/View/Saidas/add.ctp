@@ -1,19 +1,30 @@
 <div class="saidas form">
-<?php echo $this->Form->create('Saida'); ?>
+<?php echo $this->Form->create('Saida', array(
+	'inputDefaults' => array(
+		'div' => 'form-group',
+		'wrapInput' => false,
+		'class' => 'form-control'
+	),
+	'class' => 'well'
+)); ?>
 	<fieldset>
-		<legend><?php echo __('Add Saida'); ?></legend>
+		<legend><?php echo __('Adicionar Saida'); ?></legend>
 	<?php
-		echo $this->Form->input('status_id',array('options'=>$status,'empty'=>true));
-		echo $this->Form->input('despesas_id',array('options'=>$despesas));
+		echo $this->Form->input('despesas_id');
 		echo $this->Form->input('forma_pagamentos_id',array('options'=>$forma_pagamentos));
 		echo $this->Form->input('cedentes_id');
-		echo $this->Form->input('data_emissao');
-		echo $this->Form->input('data_vencimento');
-		echo $this->Form->input('data_pagamento',array('empty'=>true));
 		echo $this->Form->input('recido');
 		echo $this->Form->input('descricao');
 		echo $this->Form->input('valor');
-	?>
+		echo '<div class="form-group"><div class="row">';
+		echo $this->Form->input('data_emissao',array('div'=>'col-md-4'));
+		echo $this->Form->input('data_vencimento',array('div'=>'col-md-4'));
+		echo $this->Form->input('data_pagamento',array('empty'=>true,'div'=>'col-md-4'));
+		echo '</div></div>';
+		echo $this->Form->submit('Salvar', array(
+			'div' => 'form-group',
+			'class' => 'btn btn-primary'
+		)); ?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+<?php echo $this->Form->end(); ?>
 </div>

@@ -12,7 +12,7 @@ echo $this->Form->create('Entrada', array(
 	'class' => 'well'
 )); ?>
 	<fieldset>
-		<legend><?php echo __('Add Entrada'); ?></legend>
+		<legend><?php echo __('Adicionar Entrada'); ?></legend>
 	<?php
 		echo $this->Form->input('franquias_id');
 		echo $this->Form->input('contas_id');

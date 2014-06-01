@@ -22,7 +22,7 @@
 			<?php echo $this->Html->link($entrada['Conta']['id'], array('controller' => 'contas', 'action' => 'view', $entrada['Conta']['id'])); ?>
 		</td>
 		<td><?php echo h($entrada['Entrada']['descricao']); ?>&nbsp;</td>
-		<td><?php echo h($entrada['Entrada']['valor_total']); ?>&nbsp;</td>
+		<td><?php echo  $this->Number->currency($entrada['Entrada']['valor_total'], 'BRL'); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('Visualizar'), array('action' => 'view', $entrada['Entrada']['id'])); ?>
 			<?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $entrada['Entrada']['id'])); ?>

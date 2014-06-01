@@ -16,7 +16,11 @@ class SaidasControllerTest extends ControllerTestCase {
 		'app.saida',
 		'app.status',
 		'app.pagamento',
-		'app.entradas',
+		'app.entrada',
+		'app.franquia',
+		'app.cliente',
+		'app.forma_pagamento',
+		'app.conta',
 		'app.despesas',
 		'app.forma_pagamentos',
 		'app.cedentes'

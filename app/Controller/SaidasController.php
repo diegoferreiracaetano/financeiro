@@ -1,5 +1,7 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('CakeNumber', 'Utility');
+App::uses('CakeTime', 'Utility');
 /**
  * Saidas Controller
  *
@@ -15,12 +17,14 @@ class SaidasController extends AppController {
  */
 	public $components = array('Paginator');
 
+	
 /**
  * index method
  *
  * @return void
  */
 	public function index() {
+		CakeNumber::addFormat('BRL', array('before' => 'R$', 'thousands' => '.', 'decimals' => ','));
 		$this->Saida->recursive = 0;
 		$this->set('saidas', $this->Paginator->paginate());
 	}
@@ -49,17 +53,22 @@ class SaidasController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Saida->create();
 			if ($this->Saida->save($this->request->data)) {
-				$this->Session->setFlash(__('The saida has been saved.'));
+				$this->Session->setFlash(__($this->msgGravacaoSucesso), 'alert', array(
+						'plugin' => 'BoostCake',
+						'class' => 'alert-success'
+						));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The saida could not be saved. Please, try again.'));
+				$this->Session->setFlash(__($this->msgGravacaoError), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-danger'
+					));
 			}
 		}
-		$status = $this->Saida->Status->find('list',array('fields' => array('Status.descricao')));
 		$despesas = $this->Saida->Despesa->find('list',array('fields' => array('Despesa.descricao')));
 		$forma_pagamentos = $this->Saida->FormaPagamento->find('list',array('fields' => array('FormaPagamento.descricao')));
 		$cedentes = $this->Saida->Cedente->find('list',array('fields' => array('Cedente.nome')));
-		$this->set(compact('status', 'despesas', 'forma_pagamentos', 'cedentes'));
+		$this->set(compact('statuses', 'despesas', 'forma_pagamentos', 'cedentes'));
 	}
 
 /**
@@ -75,20 +84,26 @@ class SaidasController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Saida->save($this->request->data)) {
-				$this->Session->setFlash(__('The saida has been saved.'));
+				$this->Session->setFlash(__($this->msgGravacaoSucesso), 'alert', array(
+						'plugin' => 'BoostCake',
+						'class' => 'alert-success'
+						));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The saida could not be saved. Please, try again.'));
+				$this->Session->setFlash(__($this->msgGravacaoError), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-danger'
+					));
 			}
 		} else {
 			$options = array('conditions' => array('Saida.' . $this->Saida->primaryKey => $id));
 			$this->request->data = $this->Saida->find('first', $options);
 		}
-		$status = $this->Saida->Status->find('list');
+		$statuses = $this->Saida->Status->find('list');
 		$despesas = $this->Saida->Despesa->find('list');
-		$despesas = $this->Saida->FormaPagamento->find('list');
-		$despesas = $this->Saida->Cedente->find('list');
-		$this->set(compact('status', 'despesas', 'despesas', 'despesas'));
+		$formaPagamentos = $this->Saida->FormaPagamento->find('list');
+		$cedentes = $this->Saida->Cedente->find('list');
+		$this->set(compact('statuses', 'despesas', 'formaPagamentos', 'cedentes'));
 	}
 
 /**
@@ -105,9 +120,15 @@ class SaidasController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Saida->delete()) {
-			$this->Session->setFlash(__('The saida has been deleted.'));
+			$this->Session->setFlash(__($this->msgExclusaoSucesso), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-success'
+					));
 		} else {
-			$this->Session->setFlash(__('The saida could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__($this->msgExclusaoError), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-danger'
+					));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}

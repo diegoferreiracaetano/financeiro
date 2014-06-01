@@ -66,8 +66,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
                 <li><?php echo $this->Html->link(__('Formas de Pagamentos'), array('controller' => 'formaPagamentos', 'action' => 'index')); ?></li>
               </ul>
             </li>
-            <li><?php echo $this->Html->link(__('Contas a Pagar'), array('controller' => 'pagamentos', 'action' => 'index')); ?></li>
-            <li><?php echo $this->Html->link(__('Contas a Receber'), array('controller' => 'saidas', 'action' => 'index')); ?></li>
+            <li><?php echo $this->Html->link(__('Contas a Receber'), array('controller' => 'pagamentos', 'action' => 'index')); ?></li>
+            <li><?php echo $this->Html->link(__('Contas a Pagar'), array('controller' => 'saidas', 'action' => 'index')); ?></li>
             <li><?php echo $this->Html->link(__('Fluxo de Caixa'), array('controller' => 'relatorios', 'action' => 'index')); ?></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -77,5 +77,6 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		<?php echo $this->Session->flash(); ?>
 		<?php echo $this->fetch('content'); ?>
     </div><!-- /.container -->
+    <?php // echo $this->element('sql_dump'); ?>
 </body>
 </html>

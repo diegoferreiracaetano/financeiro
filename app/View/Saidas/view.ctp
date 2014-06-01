@@ -6,24 +6,19 @@
 			<?php echo h($saida['Saida']['id']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Status'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($saida['Status']['id'], array('controller' => 'status', 'action' => 'view', $saida['Status']['id'])); ?>
-			&nbsp;
-		</dd>
 		<dt><?php echo __('Despesas'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($saida['Despesa']['descricao'], array('controller' => 'despesas', 'action' => 'view', $saida['Despesa']['id'])); ?>
+			<?php echo $this->Html->link($saida['Despesa']['id'], array('controller' => 'despesas', 'action' => 'view', $saida['Despesa']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Forma Pagamentos'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($saida['FormaPagamento']['descricao'], array('controller' => 'despesas', 'action' => 'view', $saida['FormaPagamento']['id'])); ?>
+			<?php echo $this->Html->link($saida['FormaPagamento']['id'], array('controller' => 'forma_pagamentos', 'action' => 'view', $saida['FormaPagamento']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Cedentes'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($saida['Cedente']['nome'], array('controller' => 'despesas', 'action' => 'view', $saida['Cedente']['id'])); ?>
+			<?php echo $this->Html->link($saida['Cedente']['id'], array('controller' => 'cedentes', 'action' => 'view', $saida['Cedente']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Data Emissao'); ?></dt>

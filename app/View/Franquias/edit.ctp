@@ -1,5 +1,12 @@
 <div class="franquias form">
-<?php echo $this->Form->create('Franquia'); ?>
+<?php echo $this->Form->create('Franquia',array(
+	'inputDefaults' => array(
+		'div' => 'form-group',
+		'wrapInput' => false,
+		'class' => 'form-control'
+	),
+	'class' => 'well'
+)); ?>
 	<fieldset>
 		<legend><?php echo __('Edit Franquia'); ?></legend>
 	<?php
@@ -13,7 +20,10 @@
 		echo $this->Form->input('uf');
 		echo $this->Form->input('contato');
 		echo $this->Form->input('telefone');
-	?>
+		echo $this->Form->submit('Salvar', array(
+			'div' => 'form-group',
+			'class' => 'btn btn-primary'
+		)); ?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+<?php echo $this->Form->end(); ?>
 </div>
