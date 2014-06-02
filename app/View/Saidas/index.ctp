@@ -7,6 +7,7 @@
 			<th><?php echo $this->Paginator->sort('status_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('despesas_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('forma_pagamentos_id'); ?></th>
+			<th><?php echo $this->Paginator->sort('franquias_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('cedentes_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('data_emissao'); ?></th>
 			<th><?php echo $this->Paginator->sort('data_vencimento'); ?></th>
@@ -34,6 +35,9 @@
 		</td>
 		<td>
 			<?php echo $this->Html->link($saida['FormaPagamento']['descricao'], array('controller' => 'forma_pagamentos', 'action' => 'view', $saida['FormaPagamento']['id'])); ?>
+		</td>
+		<td>
+			<?php echo $this->Html->link($saida['Franquia']['nome'], array('controller' => 'franquias', 'action' => 'view', $saida['Franquia']['id'])); ?>
 		</td>
 		<td>
 			<?php echo $this->Html->link($saida['Cedente']['nome'], array('controller' => 'cedentes', 'action' => 'view', $saida['Cedente']['id'])); ?>

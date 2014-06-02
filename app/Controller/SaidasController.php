@@ -68,7 +68,8 @@ class SaidasController extends AppController {
 		$despesas = $this->Saida->Despesa->find('list',array('fields' => array('Despesa.descricao')));
 		$forma_pagamentos = $this->Saida->FormaPagamento->find('list',array('fields' => array('FormaPagamento.descricao')));
 		$cedentes = $this->Saida->Cedente->find('list',array('fields' => array('Cedente.nome')));
-		$this->set(compact('statuses', 'despesas', 'forma_pagamentos', 'cedentes'));
+		$franquias = $this->Saida->Franquia->find('list',array('fields' => array('Franquia.nome')));
+		$this->set(compact('statuses', 'despesas', 'forma_pagamentos', 'cedentes','franquias'));
 	}
 
 /**
@@ -100,10 +101,11 @@ class SaidasController extends AppController {
 			$this->request->data = $this->Saida->find('first', $options);
 		}
 		$statuses = $this->Saida->Status->find('list');
-		$despesas = $this->Saida->Despesa->find('list');
+		$despesas = $this->Saida->Despesa->find('list',array('fields' => array('Despesa.descricao')));
 		$formaPagamentos = $this->Saida->FormaPagamento->find('list');
-		$cedentes = $this->Saida->Cedente->find('list');
-		$this->set(compact('statuses', 'despesas', 'formaPagamentos', 'cedentes'));
+		$cedentes = $this->Saida->Cedente->find('list',array('fields' => array('Cedente.nome')));
+		$franquias = $this->Saida->Franquia->find('list',array('fields' => array('Franquia.nome')));
+		$this->set(compact('statuses', 'despesas', 'formaPagamentos', 'cedentes','franquias'));
 	}
 
 /**

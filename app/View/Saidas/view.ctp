@@ -16,6 +16,11 @@
 			<?php echo $this->Html->link($saida['FormaPagamento']['id'], array('controller' => 'forma_pagamentos', 'action' => 'view', $saida['FormaPagamento']['id'])); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Franquia'); ?></dt>
+		<dd>
+			<?php echo $this->Html->link($entrada['Franquia']['id'], array('controller' => 'franquias', 'action' => 'view', $entrada['Franquia']['id'])); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Cedentes'); ?></dt>
 		<dd>
 			<?php echo $this->Html->link($saida['Cedente']['id'], array('controller' => 'cedentes', 'action' => 'view', $saida['Cedente']['id'])); ?>

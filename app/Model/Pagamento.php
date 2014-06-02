@@ -69,9 +69,19 @@ class Pagamento extends AppModel {
 /**
  * Relatórios
  */	
- public function getTotalEntradas(){
+ public function getTotalEntradas($cliente_id = null){
  
- 	$array_dados =  $this->query('SELECT sum(valor) as total from pagamentos where data_pagamento IS NOT NULL');
+ 	$sql = 'SELECT sum(valor) as total from pagamentos p
+ 			LEFT JOIN entradas e ON e.id = p.entradas_id  
+			LEFT JOIN franquias f ON f.id = e.franquias_id
+			LEFT JOIN clientes  c ON c.id = f.clientes_id 
+ 					where data_pagamento IS NOT NULL';
+ 	
+ 	if($cliente_id){
+ 	 $sql .=' AND c.id = '.$cliente_id;
+ 	}
+ 	
+ 	$array_dados =  $this->query($sql);
  	return $array_dados[0][0];	
  }
 	

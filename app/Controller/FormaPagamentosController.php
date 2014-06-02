@@ -160,6 +160,6 @@ class FormaPagamentosController extends AppController {
 		
 		$this->set('formaPagamentos', $array_pagamentos);
 		
-		   $this->layout = 'ajax';
+		  $this->view = 'Json';
 	}
 }

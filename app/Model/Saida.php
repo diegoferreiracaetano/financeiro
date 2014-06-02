@@ -35,7 +35,7 @@ class Saida extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'cedentes_id' => array(
+		/*'cedentes_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -44,7 +44,7 @@ class Saida extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
-		),
+		),*/
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -88,12 +88,31 @@ class Saida extends AppModel {
 				END)',
 			'fields' => '',
 			'order' => ''
-		)
+		),
+		'Franquia' => array(
+			'className' => 'Franquia',
+			'foreignKey' => 'franquias_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
 	);
 	
 	
-	public function getTotalSaidas(){
-		$array_dados = $this->query('SELECT SUM(valor) as total FROM saidas where data_pagamento IS NOT NULL');
+	public function getTotalSaidas($cliente_id = null){
+		
+		$sql = 'SELECT SUM(valor) as total FROM saidas s
+				LEFT JOIN franquias f ON f.id = s.franquias_id
+				LEFT JOIN clientes  c ON c.id = f.clientes_id 
+ 				where data_pagamento IS NOT NULL';
+		
+		
+	 	if($cliente_id){
+	 	 $sql .=' AND c.id = '.$cliente_id;
+	 	}
+ 	
+ 	
+		$array_dados = $this->query($sql);
 		return $array_dados[0][0];		
 	}
 }

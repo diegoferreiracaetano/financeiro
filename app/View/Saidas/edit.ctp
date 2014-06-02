@@ -13,7 +13,8 @@
 		echo $this->Form->input('id');
 		echo $this->Form->input('despesas_id');
 		echo $this->Form->input('forma_pagamentos_id');
-		echo $this->Form->input('cedentes_id');
+		echo $this->Form->input('franquias_id',array('empty'=>true));
+		echo $this->Form->input('cedentes_id',array('empty'=>true));
 		echo $this->Form->input('recido');
 		echo $this->Form->input('descricao');
 		echo $this->Form->input('valor');
